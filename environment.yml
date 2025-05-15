@@ -13,6 +13,5 @@ dependencies:
   - ipykernel
   - openpyxl
   - xlrd
-  - pip
-  - pip:
-      - jupyter
+  - ipywidgets
+  - nb_conda_kernels
