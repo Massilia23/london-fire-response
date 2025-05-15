@@ -1,8 +1,8 @@
 # 🔥 London Fire Brigade - Temps de Réponse
 
 ## 🎯 Objectif
-
-Analyser les temps de réponse et de mobilisation de la Brigade des Pompiers de Londres à partir des données ouvertes disponibles depuis 2009.
+Le projet porte sur l’analyse des incidents et mobilisations des services de la London Fire Brigade.
+L’idée est de comprendre comment ces interventions sont gérées, d’identifier des schémas de mobilisation (temps de réponse, distribution géographique, nature des incidents...) et éventuellement prédire ou améliorer l’efficacité opérationnelle.
 
 Ce projet s’inscrit dans le cadre du cursus Data Scientist et a pour but de produire :
 - Un rapport d'exploration et de visualisation des données
