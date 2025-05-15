@@ -1,24 +1,29 @@
 #!/bin/bash
 
-# Script pour créer l'environnement conda london-fire-response
+# Définir le chemin d'installation de Miniconda
+CONDA_DIR="$HOME/miniconda"
 
-# Affichage du nom du script
-echo "📦 Installation de l'environnement conda 'london-fire-response'..."
+# Télécharger Miniconda automatiquement
+echo "🔽 Téléchargement de Miniconda..."
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 
-# Vérifie si conda est installé
-if ! command -v conda &> /dev/null
-then
-    echo "❌ Conda n'est pas installé. Installe Miniconda ou Anaconda d'abord."
-    exit 1
-fi
+# Installer silencieusement
+echo "⚙️ Installation de Miniconda dans $CONDA_DIR..."
+bash /tmp/miniconda.sh -b -p "$CONDA_DIR"
 
-# Création de l'environnement
+# Initialiser conda
+eval "$($CONDA_DIR/bin/conda shell.bash hook)"
+
+# Ajouter conda au PATH
+export PATH="$CONDA_DIR/bin:$PATH"
+
+# Mettre à jour conda
+echo "🔄 Mise à jour de conda..."
+conda update -y -n base -c defaults conda
+
+# Créer l’environnement conda à partir du fichier YAML
+echo "📦 Création de l'environnement conda depuis environment.yml..."
 conda env create -f environment.yml
 
-# Initialisation conda pour bash (utile si 'conda activate' ne fonctionne pas)
-echo "🔧 Initialisation de conda pour bash..."
-conda init bash
-
-echo "✅ Environnement créé. Redémarre ton terminal ou exécute : 'source ~/.bashrc'"
-echo "➡️ Ensuite active l'environnement avec : conda activate london-fire-response"
-
+echo "✅ Installation terminée ! Activez l'environnement avec :"
+echo "   conda activate london-fire-response"
