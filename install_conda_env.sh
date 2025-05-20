@@ -26,4 +26,4 @@ echo "📦 Création de l'environnement conda depuis environment.yml..."
 conda env create -f environment.yml
 
 echo "✅ Installation terminée ! Activez l'environnement avec :"
-echo "   conda activate london-fire-response"
+echo "   source ~/miniconda/bin/activate puis conda activate london-fire-response"
