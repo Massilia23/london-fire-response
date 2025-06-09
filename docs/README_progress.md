@@ -6,8 +6,7 @@
 - Initialisation de la structure de dossiers locale sur la VM :
   - `data/raw/incidents/` : pour les fichiers bruts incidents.
   - `data/raw/mobilisations/` : pour les fichiers bruts mobilisations.
-  - `notebooks/` : pour les notebooks Jupyter.
-  - `scripts/` : pour les scripts Python.
+  - `notebooks/` : pour les notebooks.
 - Téléchargement et placement des fichiers de données fournis par la Brigade des Pompiers de Londres dans les dossiers appropriés (incidents, mobilisations).
 
 ## 2. Gestion du versionnement avec Git et GitHub
@@ -28,3 +27,4 @@
 - Création d’un notebook Jupyter (`notebooks/data_exploration.ipynb`) pour réaliser l’exploration initiale des données.
 - Installation et configuration de VSCode sur la VM pour travailler confortablement sur les notebooks et scripts.
 - Lancement de l’exploration des données : import, visualisation, nettoyage, analyse descriptive.
+- Lancement de la modélisation pour répondre à la problématique suivante : Prédire la durée totale d’intervention de la brigade pour de futurs incidents
