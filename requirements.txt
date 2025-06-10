@@ -1,8 +1,17 @@
-# If virtuell environment is used, this file should be placed in the root directory of the project.
-# activate the virtual environment before installing the packages.
-#.\.venv\Scripts\Activate.ps1
+# Pour créer un environnement virtuel, placez-vous à la racine de votre projet puis lancez la commande suivante :
+# python -m venv .venv
 
-# To install the packages, run: pip install -r requirements.txt
+# Pour activer l'environnement virtuel :
+
+# Sous Windows PowerShell :
+# .\.venv\Scripts\Activate.ps1
+
+# Sous Linux/macOS :
+# source .venv/bin/activate
+
+# Une fois l'environnement activé, installez les packages listés dans ce fichier avec la commande :
+# pip install -r requirements.txt
+
 pandas==2.2.3
 numpy==2.2.6
 matplotlib==3.10.3
