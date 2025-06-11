@@ -46,7 +46,7 @@ Les données utilisées sont fournies par la ville de Londres :
 - [x] Téléchargement des fichiers incidents et mobilisations
 - [x] Mise en place de Git LFS pour gérer les fichiers > 100 Mo
 - [ ] Prétraitement des données
-- [ ] Analyse exploratoire 
+- [x] Analyse exploratoire 
 - [ ] Visualisations
 - [ ] Modélisation et prédictions
 - [ ] Rédaction des rapports
