@@ -34,4 +34,3 @@ Option 2:
 - réalisé : Installation et configuration de VSCode sur la VM pour travailler confortablement sur les notebooks et scripts.
 - Lancement de l’exploration des données : import, visualisation, nettoyage, analyse descriptive.
 => Réalisé: chargement et nettoyage des données incidents et mobilisations via : notebooks\Ingestion
-
