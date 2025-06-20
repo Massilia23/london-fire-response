@@ -22,8 +22,8 @@ incident_path = "data/raw/Cleaned_data/InUSE/cleaned_data_incidents.csv"
 mobilisation_path = "data/raw/Cleaned_data/InUSE/cleaned_data_mobilisations.csv"
 
 # 3. Vérification des chemins
-assert os.path.exists(incident_path), f"❌ Fichier introuvable : {incident_path}"
-assert os.path.exists(mobilisation_path), f"❌ Fichier introuvable : {mobilisation_path}"
+assert os.path.exists(incident_path), f" Fichier introuvable : {incident_path}"
+assert os.path.exists(mobilisation_path), f"Fichier introuvable : {mobilisation_path}"
 
 # 4. Chargement des données
 df_incidents = spark.read.option("header", True).option("inferSchema", True).csv(incident_path)
@@ -53,7 +53,7 @@ df_mobilisations_clean = df_mobilisations.withColumn("incident_id_cleaned", clea
 
 # 8. Dédupliquer les incidents (1 ligne par incident)
 df_incidents_unique = df_incidents_clean.dropDuplicates(["incident_id_cleaned"])
-print(f"🔢 Incidents uniques : {df_incidents_unique.count():,}")
+print(f"Incidents uniques : {df_incidents_unique.count():,}")
 
 # 9. Jointure
 df_joined = df_mobilisations_clean.join(df_incidents_unique, on="incident_id_cleaned", how="inner")
