@@ -1,4 +1,4 @@
-# État d’avancement du projet « Temps de Réponse Brigade des Pompiers de Londres »
+# État d’avancement du projet « Brigade des Pompiers de Londres »
 ## 1. Mise en place du projet
 
 - Création du dépôt GitHub dédié au projet : `london-fire-response`.
@@ -17,7 +17,7 @@
 - Installation et configuration de Git LFS (Large File Storage) pour gérer les fichiers volumineux (plus de 100 Mo).
 - Push des fichiers volumineux vers GitHub via Git LFS avec succès.
 
-## 3. Environnement de travail
+## 3. Environnement de travail:
 
  Option 1:
   - Tentative de création d’un environnement Conda pour gérer les dépendances Python.
@@ -28,9 +28,15 @@ Option 2:
   - Tentative de création d’un environnement virtuel venv pour gérer les dépendances Python.
   - Recommandation et préparation à la création d’un environnement isolé nommé via les instructions dans le ` requirements.txt`
 
-## 4. Prochaines étapes prévues
+## 4. Prochaines étapes prévues et réalisées:
 
+-Réalisé : Ingestion des données de mobilisations et incidents via le contenu du dossier: notebooks\Ingestion 
 - Réalisé : Création d’un notebook Jupyter (`notebooks/data_exploration.ipynb`) pour réaliser l’exploration initiale des données.
+-Réalisé : Création d’un notebook Jupyter (`notebooks/data_exploration_incidents.ipynb`) pour réaliser l’exploration des données d'incidents.
+-Réalisé : Création d’un notebook Jupyter (`notebooks/data_exploration_mobilisations.ipynb`) pour réaliser l’exploration des données de mobilisations.
 - réalisé : Installation et configuration de VSCode sur la VM pour travailler confortablement sur les notebooks et scripts.
 - Lancement de l’exploration des données : import, visualisation, nettoyage, analyse descriptive.
-=> Réalisé: chargement et nettoyage des données incidents et mobilisations via : notebooks\Ingestion
+- Réalisé : Modélisation : time serie sarima/ prophet via le dossier notebooks\models
+- Réalisé : Jointure des deux jeu de données mobilisation et incidents ici: data\df_inner_join_successful.csv
+-Réalisé: toutes les datas traitées sont ici : data\raw
+- Réalisé: organisation et archivage d'ancien fichiers 

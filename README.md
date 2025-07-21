@@ -2,13 +2,13 @@
 
 ## 🎯 Objectif
 Le projet porte sur l’analyse des incidents et mobilisations des services de la brigade des pompiers de Londres.
-L’idée est de comprendre comment ces interventions sont gérées, d’identifier des schémas de mobilisation (temps de réponse, distribution géographique, nature des incidents...) et éventuellement prédire ou améliorer l’efficacité opérationnelle.
+L’idée est de comprendre comment ces interventions sont gérées, d’identifier des schémas de mobilisation (interventions, temps de réponse, distribution géographique, nature des incidents...) et éventuellement prédire ou améliorer l’efficacité opérationnelle.
 
 Ce projet s’inscrit dans le cadre du cursus Data Scientist et a pour but de produire :
-- Un rapport d'exploration et de visualisation des données ' pas sur de ça'
-- Un rapport de modélisation
-- Un rapport final accompagné du code
-- Un streamlit de présentation 
+- Un rapport d'exploration et de visualisation via le contenu du dossier: \london-fire-response\notebooks\exploration
+- Un rapport de modélisation via le contenu du dossier : notebooks\models
+- Le code est contenu dans ce repo
+- Un streamlit de présentation du travail 
 
 ## 📁 Arborescence actuelle du projet
 
@@ -64,9 +64,9 @@ Les données utilisées sont fournies par la ville de Londres :
 - [x] Mise en place de Git LFS pour gérer les fichiers > 100 Mo
 - [x] Prétraitement des données
 - [x] Analyse exploratoire
-- [ ] Visualisations
-- [ ] Modélisation et prédictions
-- [ ] Rédaction des rapports
+- [x] Visualisations
+- [x] Modélisation et prédictions
+- [x] Rédaction des rapports
 
 ## 📌 Auteur
 
