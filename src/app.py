@@ -1,4 +1,5 @@
 # app.py
+# app.py
 import sys
 from pathlib import Path
 
@@ -19,11 +20,22 @@ ROOT   = Path(__file__).resolve().parent.parent
 DATA   = ROOT / "data" / "raw" / "Cleaned_data" / "InUSE"
 ASSETS = ROOT / "data" / "data_streamlit"
 
-def safe_image(name: str, **kwargs):
-    """Affiche l'image si elle existe; sinon un warning propre."""
+# =========================================
+#           Gestion des images en cache
+# =========================================
+@st.cache_data
+def charger_image(name: str):
+    """Charge une image en cache pour éviter la relecture disque."""
     path = ASSETS / name
     if path.exists():
-        st.image(str(path), **kwargs)
+        return Image.open(path)
+    return None
+
+def safe_image(name: str, **kwargs):
+    """Affiche l'image si elle existe, sinon un warning."""
+    img = charger_image(name)
+    if img:
+        st.image(img, **kwargs)
     else:
         st.warning(f"⚠️ Image manquante : {name} (attendue dans {ASSETS})")
 
@@ -39,27 +51,34 @@ st.set_page_config(
 # =========================================
 #           Chargement des données
 # =========================================
-@st.cache_data
+@st.cache_data(show_spinner="💾 Chargement des données...")
 def charger_donnees():
+    """
+    Charge les datasets incidents et mobilisations depuis le dossier local.
+    Les données sont mises en cache pour éviter un rechargement complet
+    à chaque interaction avec l'application.
+    """
     incidents_path = DATA / "cleaned_data_incidents.csv"
     mobilis_path   = DATA / "cleaned_data_mobilisations.csv"
 
-    if not incidents_path.exists():
-        st.error(f"Fichier introuvable : {incidents_path}")
-        st.stop()
-    if not mobilis_path.exists():
-        st.error(f"Fichier introuvable : {mobilis_path}")
-        st.stop()
+    # Lecture optimisée avec parse_dates pour éviter reconversion plus tard
+    df = pd.read_csv(
+        incidents_path,
+        low_memory=False,
+        parse_dates=["DateOfCall"]  # important pour resampling et analyses temporelles
+    )
 
-    df    = pd.read_csv(incidents_path, low_memory=False, parse_dates=["DateOfCall"])
-    # Ajuste parse_dates si une colonne date existe côté mobilisations
-    df_mb = pd.read_csv(mobilis_path, low_memory=False)
+    # Charger seulement si nécessaire
+    df_mb = pd.read_csv(
+        mobilis_path,
+        low_memory=False
+        # parse_dates=["DateOfCall"] si besoin pour la table mobilisations
+    )
 
     return df, df_mb
 
+# Chargement effectif des datasets
 df, df_mb = charger_donnees()
-
-
 # =========================================
 #           Sidebar / Navigation
 # =========================================
@@ -350,7 +369,7 @@ elif menu == "4. Modélisation des séries temporelles":
 - **SARIMA** : adapté aux séries agrégées **mensuelles**, capture une **tendance** (*d=1*) et une **saisonnalité annuelle** (*D=1, m=12*) avec une structure parcimonieuse.
 - **Prophet** : efficace au **journalier**, gère **tendance**, **saisonnalités multiples** (hebdo/annuelle) et **effets calendaires** ; robuste aux **outliers**.
 """)
-      # Indexation temporelle (concaténation date + heure -> datetime)
+    # Indexation temporelle (concaténation date + heure -> datetime)
     st.subheader("🧱 Indexation temporelle")
     st.markdown("Apres l'EDA des colonnes pertinentes, nous avons créons un index `datetime` en concaténant la date et l'heure de l'appel qui déclenche une interventions, afin d'assurer un **horodatage précis** pour les modèles.")
 
@@ -366,11 +385,7 @@ elif menu == "4. Modélisation des séries temporelles":
 
     def build_inc_daily(df_):
         """Série journalière : comptage d'incidents par jour, index continu."""
-        s = (
-            df_["DateOfCall"].dt.floor("D")   # jour
-              .value_counts()
-              .sort_index()
-        )
+        s = (df_["DateOfCall"].dt.floor("D").value_counts().sort_index())
         full_days = pd.date_range(s.index.min(), s.index.max(), freq="D")
         s = s.reindex(full_days, fill_value=0).astype("float64")
         s.index.name = "ds"
@@ -379,10 +394,7 @@ elif menu == "4. Modélisation des séries temporelles":
     def build_inc_monthly(df_):
         """Série mensuelle : comptage d'incidents par mois, index continu."""
         s = (
-            df_["DateOfCall"].dt.to_period("M")
-              .value_counts()
-              .sort_index()
-        )
+            df_["DateOfCall"].dt.to_period("M").value_counts().sort_index())
         full_months = pd.period_range(s.index.min(), s.index.max(), freq="M")
         s = s.reindex(full_months, fill_value=0)
         s.index = s.index.to_timestamp()  # DatetimeIndex
@@ -462,8 +474,6 @@ Ces chocs **échappent** à la saisonnalité régulière et justifient une déco
 
 **👉 Choix retenu pour l’analyse : STL**, car **robuste** et **adaptatif** sur une longue série urbaine.
 """)
-
-
 
 # =========================================
 # 5. Prédictions futures

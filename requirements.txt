@@ -30,3 +30,6 @@ statsmodels
 plotly
 plotly_express
 plotly_resampler
+prophet
+Pillow
+
